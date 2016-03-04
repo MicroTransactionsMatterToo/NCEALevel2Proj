@@ -34,7 +34,7 @@ int main(int argc, char *argv[], char *envp[]) {
         // Check if it's the USER entry of path
         if (std::regex_search(envp[i], userMatch) == true) {
             // Store the regex cause otherwise it breaks
-            std::regex notNAME("[^USER=]");
+            std::regex notNAME("[^USER=].+");
             // Filter out the user's name and store it
             std::cout << envp[i] << std::endl;
             auto* test = envp;

@@ -82,3 +82,58 @@ Fix:
 Apparently char*[] can't be used without it being an actual pointer
 e.g. char[5] derp = 'hello';
     char *herp[] = derp;
+
+
+
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake --build /Users/ennis/Library/Caches/CLion12/cmake/generated/625bb707/625bb707/Debug0 --target all -- -j 4
+Scanning dependencies of target NCEA
+[ 50%] Building CXX object CMakeFiles/NCEA.dir/UmbrellaOrder.cpp.o
+/Users/ennis/NCEA/UmbrellaOrder.cpp:30:31: warning: sizeof on array function parameter will return size of 'char **' instead of 'char *[]' [-Wsizeof-array-argument]
+    for (int i = 0; i < sizeof(envp); i++) {
+                              ^
+/Users/ennis/NCEA/UmbrellaOrder.cpp:27:40: note: declared here
+int main(int argc, char *argv[], char *envp[]) {
+                                      ^
+From here:
+Issue:
+Getting the users username from the environment vars
+Desc: regex_search needs to assign it's results to a var so it can be printed using cout
+Error:
+/Users/ennis/NCEA/UmbrellaOrder.cpp:39:29: error: no matching function for call to 'regex_search'
+            auto matching = std::regex_search(envUserName, notNAME);
+                            ^~~~~~~~~~~~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:5963:1: note: candidate template ignored: deduced conflicting types for parameter '_CharT' ('char *' vs. 'char')
+regex_search(const _CharT* __str, const basic_regex<_CharT, _Traits>& __e,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2869:5: note: candidate template ignored: could not match 'basic_string<type-parameter-0-2, type-parameter-0-0, type-parameter-0-1>' against 'char **'
+    regex_search(const basic_string<_Cp, _ST, _SA>& __s,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2839:5: note: candidate function template not viable: requires at least 4 arguments, but 2 were provided
+    regex_search(_Bp, _Bp, match_results<_Bp, _Ap>&, const basic_regex<_Cp, _Tp>&,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2845:5: note: candidate function template not viable: requires at least 4 arguments, but 2 were provided
+    regex_search(const _Cp*, const _Cp*, match_results<const _Cp*, _Ap>&,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2851:5: note: candidate function template not viable: requires at least 3 arguments, but 2 were provided
+    regex_search(_Bp, _Bp, const basic_regex<_Cp, _Tp>&,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2857:5: note: candidate function template not viable: requires at least 3 arguments, but 2 were provided
+    regex_search(const _Cp*, const _Cp*,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2863:5: note: candidate function template not viable: requires at least 3 arguments, but 2 were provided
+    regex_search(const _Cp*, match_results<const _Cp*, _Ap>&, const basic_regex<_Cp, _Tp>&,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2876:5: note: candidate function template not viable: requires at least 3 arguments, but 2 were provided
+    regex_search(const basic_string<_Cp, _ST, _SA>& __s,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/regex:2884:5: note: candidate function template not viable: requires at least 4 arguments, but 2 were provided
+    regex_search(__wrap_iter<_Iter> __first,
+    ^
+1 warning and 1 error generated.
+make[2]: *** [CMakeFiles/NCEA.dir/UmbrellaOrder.cpp.o] Error 1
+make[1]: *** [CMakeFiles/NCEA.dir/all] Error 2
+make: *** [all] Error 2
+Reason:
+Ignores all templates because of conflicts
+Fix:
+NOt found

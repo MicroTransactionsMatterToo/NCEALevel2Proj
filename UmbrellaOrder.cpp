@@ -29,7 +29,7 @@ int main(int argc, char *argv[], char *envp[]) {
     // Debugging fo now
     for (int i = 0; i < sizeof(envp); i++) {
         // Store regexx for matching
-        std::regex userMatch("[USER]?");
+        std::regex userMatch("USER=");
         // Check if it's the USER entry of path
         if (std::regex_search(envp[i], userMatch)) {
             std::cout << envp[i] << std::endl;

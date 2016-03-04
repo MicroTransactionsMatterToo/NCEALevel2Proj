@@ -35,11 +35,13 @@ int main(int argc, char *argv[], char *envp[]) {
         if (std::regex_search(envp[i], userMatch) == true) {
             // Store the regex cause otherwise it breaks
             std::regex notNAME("[^USER=].+");
-            // Filter out the user's name and store it
+            /* Debug Stuff
             std::cout << envp[i] << std::endl;
             auto* test = envp;
             std::cout << typeid(test).name() << std::endl;
             std::cout << test << std::endl;
+            */
+            // Filter out the user's name and store it
             const char *envUserName{envp[i]};
             std::match_results<const char*> match;
             std::regex_search(envUserName, match, notNAME);

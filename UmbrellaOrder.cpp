@@ -1,7 +1,6 @@
 //
 // Created by Ennis Massey on 4/03/16.
 //
-#include <tclDecls.h>
 #include "UmbrellaOrder.h"
 // Namespace to store number of order and whats been previously ordered.
 namespace {
@@ -12,7 +11,7 @@ namespace {
     };
 }
 // Functions that main will call
-// Confirm Order
+// Confirms Order
 void confirmOrder() {
 
 }
@@ -25,7 +24,7 @@ void userInput() {
 
 }
 // Main Function
-int main(int argc, char *argv[], char envp[]) {
+int main(int argc, char *argv[], char *envp[]) {
     // Greeting
     // Debugging fo now
     for (int i = 0; i < 10; i++) {

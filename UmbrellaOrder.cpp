@@ -10,6 +10,19 @@ namespace {
             orderNum += 1;
     };
 }
+// Functions that main will call
+// Confirm Order
+void confirmOrder() {
+
+}
+// Passes orders to a list
+void orderToList() {
+
+}
+// Takes user input
+void userInput() {
+
+}
 // Main Function
 int main(int argc, char *argv[]) {
 

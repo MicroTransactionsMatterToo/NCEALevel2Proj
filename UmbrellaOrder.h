@@ -9,5 +9,6 @@
 #include <vector>
 #include <array>
 #include <regex>
+#include <cctype>
 // Usings
 #endif //PROJECT_UMBRELLAORDER_H

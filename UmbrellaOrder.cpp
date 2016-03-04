@@ -42,10 +42,23 @@ int main(int argc, char *argv[], char *envp[]) {
             std::cout << test << std::endl;
             */
             // Filter out the user's name and store it
-            const char *envUserName{envp[i]};
-            std::match_results<const char*> match;
+            // Assign the correct envp index to a char cause otherwise I get errors
+            char *envUserName{envp[i]};
+            // Create literal match results holder
+            std::cmatch match;
+            // Find everything proceeded by USER= and then return it excluding USER=
             std::regex_search(envUserName, match, notNAME);
-            std::cout << match.str() << std::endl;
+            // Assign matches string result to another char for same reason as above
+            char *fetchedName;
+            strcpy(fetchedName, match.str().data());
+            char *firstLetter;
+            strcpy(firstLetter, fetchedName);
+            // Capitalize first letter - Here we have to write to a new char to prevent breakage
+            char usersName[sizeof(*fetchedName)];
+            strcpy(usersName, std::toupper(firstLetter));
+
+            std::cout << usersName[1] << std::endl;
+            std::cout << "Welcome to UmbrellaOrder " << std::endl;
         }
     }
 }

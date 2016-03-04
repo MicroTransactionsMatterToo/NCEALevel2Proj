@@ -83,7 +83,8 @@ Apparently char*[] can't be used without it being an actual pointer
 e.g. char[5] derp = 'hello';
     char *herp[] = derp;
 
-
+Error:
+sizeof(envp) will return as char **, which may break some things
 
 /Applications/CLion.app/Contents/bin/cmake/bin/cmake --build /Users/ennis/Library/Caches/CLion12/cmake/generated/625bb707/625bb707/Debug0 --target all -- -j 4
 Scanning dependencies of target NCEA
@@ -94,6 +95,10 @@ Scanning dependencies of target NCEA
 /Users/ennis/NCEA/UmbrellaOrder.cpp:27:40: note: declared here
 int main(int argc, char *argv[], char *envp[]) {
                                       ^
+Fix:
+Change envp to pointer to envp
+e.g. *envp
+
 From here:
 Issue:
 Getting the users username from the environment vars
@@ -136,4 +141,5 @@ make: *** [all] Error 2
 Reason:
 Ignores all templates because of conflicts
 Fix:
-NOt found
+Needed to use an initializer list to copy list from envp to envUserName
+Also needed to change std::smatch to std::match_results<const char*> match;

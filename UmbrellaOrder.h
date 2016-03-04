@@ -7,6 +7,6 @@
 #include <iostream>
 #include <map>
 #include <vector>
-#include <vector>
+#include <array>
 // Usings
 #endif //PROJECT_UMBRELLAORDER_H

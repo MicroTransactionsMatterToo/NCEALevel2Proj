@@ -1,0 +1,84 @@
+Error 1:
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake --build /Users/ennis/Library/Caches/CLion12/cmake/generated/625bb707/625bb707/Debug0 --target all -- -j 4
+Scanning dependencies of target NCEA
+[ 50%] Building CXX object CMakeFiles/NCEA.dir/UmbrellaOrder.cpp.o
+In file included from /Users/ennis/NCEA/UmbrellaOrder.cpp:4:
+In file included from /Users/ennis/NCEA/UmbrellaOrder.h:7:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iostream:38:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/ios:216:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__locale:15:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:439:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm:627:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:258:9: error: field has incomplete type 'char const[]'
+    _T1 first;
+        ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:588:16: note: in instantiation of template class 'std::__1::pair<char const[], int>' requested here
+    value_type __cc;
+               ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:595:16: note: in instantiation of template class 'std::__1::__value_type<char [], int>' requested here
+    value_type __value_;
+               ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:826:16: note: in instantiation of template class 'std::__1::__tree_node<std::__1::__value_type<char [], int>, void *>' requested here
+        return static_cast<__node_pointer>
+               ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:1122:22: note: in instantiation of member function 'std::__1::__tree<std::__1::__value_type<char [], int>, std::__1::__map_value_compare<char [], std::__1::__value_type<char [], int>, int, false>, std::__1::allocator<std::__1::__value_type<char [], int> > >::__end_node' requested here
+    __begin_node() = __end_node();
+                     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:843:11: note: in instantiation of member function 'std::__1::__tree<std::__1::__value_type<char [], int>, std::__1::__map_value_compare<char [], std::__1::__value_type<char [], int>, int, false>, std::__1::allocator<std::__1::__value_type<char [], int> > >::__tree' requested here
+        : __tree_(__vc(key_compare())) {}
+          ^
+/Users/ennis/NCEA/UmbrellaOrder.cpp:7:33: note: in instantiation of member function 'std::__1::map<char [], int, int, std::__1::allocator<std::__1::pair<char const[], int> > >::map' requested here
+    std::map<char [], int, int> orderSt;
+                                ^
+In file included from /Users/ennis/NCEA/UmbrellaOrder.cpp:4:
+In file included from /Users/ennis/NCEA/UmbrellaOrder.h:7:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iostream:38:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/ios:216:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__locale:15:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:439:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm:627:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:258:9: error: field has incomplete type 'char []'
+    _T1 first;
+        ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:589:21: note: in instantiation of template class 'std::__1::pair<char [], int>' requested here
+    __nc_value_type __nc;
+                    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:595:16: note: in instantiation of template class 'std::__1::__value_type<char [], int>' requested here
+    value_type __value_;
+               ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:826:16: note: in instantiation of template class 'std::__1::__tree_node<std::__1::__value_type<char [], int>, void *>' requested here
+        return static_cast<__node_pointer>
+               ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:1122:22: note: in instantiation of member function 'std::__1::__tree<std::__1::__value_type<char [], int>, std::__1::__map_value_compare<char [], std::__1::__value_type<char [], int>, int, false>, std::__1::allocator<std::__1::__value_type<char [], int> > >::__end_node' requested here
+    __begin_node() = __end_node();
+                     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:843:11: note: in instantiation of member function 'std::__1::__tree<std::__1::__value_type<char [], int>, std::__1::__map_value_compare<char [], std::__1::__value_type<char [], int>, int, false>, std::__1::allocator<std::__1::__value_type<char [], int> > >::__tree' requested here
+        : __tree_(__vc(key_compare())) {}
+          ^
+/Users/ennis/NCEA/UmbrellaOrder.cpp:7:33: note: in instantiation of member function 'std::__1::map<char [], int, int, std::__1::allocator<std::__1::pair<char const[], int> > >::map' requested here
+    std::map<char [], int, int> orderSt;
+                                ^
+In file included from /Users/ennis/NCEA/UmbrellaOrder.cpp:4:
+In file included from /Users/ennis/NCEA/UmbrellaOrder.h:8:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:423:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:826:16: error: static_cast from 'pointer' (aka 'std::__1::__tree_end_node<std::__1::__tree_node_base<void *> *> *') to '__node_pointer' (aka 'std::__1::__tree_node<std::__1::__value_type<char [], int>, void *> *'), which are not related by inheritance, is not allowed
+        return static_cast<__node_pointer>
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:1122:22: note: in instantiation of member function 'std::__1::__tree<std::__1::__value_type<char [], int>, std::__1::__map_value_compare<char [], std::__1::__value_type<char [], int>, int, false>, std::__1::allocator<std::__1::__value_type<char [], int> > >::__end_node' requested here
+    __begin_node() = __end_node();
+                     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:843:11: note: in instantiation of member function 'std::__1::__tree<std::__1::__value_type<char [], int>, std::__1::__map_value_compare<char [], std::__1::__value_type<char [], int>, int, false>, std::__1::allocator<std::__1::__value_type<char [], int> > >::__tree' requested here
+        : __tree_(__vc(key_compare())) {}
+          ^
+/Users/ennis/NCEA/UmbrellaOrder.cpp:7:33: note: in instantiation of member function 'std::__1::map<char [], int, int, std::__1::allocator<std::__1::pair<char const[], int> > >::map' requested here
+    std::map<char [], int, int> orderSt;
+                                ^
+3 errors generated.
+make[2]: *** [CMakeFiles/NCEA.dir/UmbrellaOrder.cpp.o] Error 1
+make[1]: *** [CMakeFiles/NCEA.dir/all] Error 2
+make: *** [all] Error 2
+
+Fix:
+Apparently char*[] can't be used without it being an actual pointer
+e.g. char[5] derp = 'hello';
+    char *herp[] = derp;

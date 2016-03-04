@@ -1,11 +1,10 @@
 //
 // Created by Ennis Massey on 4/03/16.
 //
-
 #include "UmbrellaOrder.h"
 // Namespace to store number of order and whats been previously ordered.
-namespace orderStore {
-    std::vector<char*[] /* Colour */, int /*quantity*/, int /*Order number*/>;
+namespace {
+    std::map<char*, int, int> orderSt;
     int orderNum;
     void incrNum () {
             orderNum += 1;

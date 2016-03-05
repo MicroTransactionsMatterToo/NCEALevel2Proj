@@ -60,8 +60,7 @@ int main(int argc, char *argv[], char *envp[]) {
                 auto tmp = fetchedName[j];
                 usersName.push_back(tmp);
             }
-            std::cout << usersName << std::endl;
-            std::cout << "Welcome to UmbrellaOrder " << std::endl;
+            std::cout << "Welcome to UmbrellaOrder " << usersName << std::endl;
         }
     }
 }

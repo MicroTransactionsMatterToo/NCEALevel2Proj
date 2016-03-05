@@ -11,6 +11,7 @@
 #include <regex>
 #include <cctype>
 #include <string>
+#include <list>
 // Usings
 // String cause otherwise everything is is broken
 using std::string;

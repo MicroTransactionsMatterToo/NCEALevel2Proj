@@ -4,21 +4,27 @@
 #include "UmbrellaOrder.h"
 // Namespace to store number of order and whats been previously ordered.
 namespace orderNum {
-    std::map<char*, int, int> orderSt;
+    std::map<string, std::pair<int, int>> ordersMade;
     int orderNum;
     void incrNum () {
             orderNum += 1;
     };
 }
 // Functions that main will call
+
 // Confirms Order
 void confirmOrder() {
 
 }
+
 // Passes orders to a list
 void orderToList() {
 
 }
+
+// Prototype to prevent breakage
+void initPrompt();
+
 // Takes user input
 // Now thats done, take the user's desired input
 void colInput() {
@@ -27,18 +33,26 @@ void colInput() {
     string usersInput; // String for storing user input
     // Use getline for input extraction
     getline(std::cin, usersInput);
+    // Append usersInput to orderNum::ordersMade
+    orderNum::ordersMade[usersInput] = std::pair<int, int>(1, 1);
+    // Because it's stored as a pair, we have to access it like this
+    std::cout << orderNum::ordersMade["yoho"].first; // First of the pair
+    std::cout << orderNum::ordersMade["yoho"].second; // Second of the pair
 };
 
 
 // Initial Prompt
 void inputPrompt() {
-    std::cout << "Please enter the desired color of your Umbrella" << std::endl;
-    std::cout << "You will then be prompted for quantity. To cancel an order, type cancel. To finish an order and  proceed to checkout, type done" << std::endl;
     // Print Order Num
     std::cout << orderNum::orderNum << std::endl;
     colInput();
 };
-
+void initPrompt() {
+    // Moved here so it only prints once
+    std::cout << "Please enter the desired color of your Umbrella" << std::endl;
+    std::cout << "You will then be prompted for quantity. To cancel an order, type cancel. To finish an order and  proceed to checkout, type done" << std::endl;
+    inputPrompt();
+}
 
 // Main Function
 int main(int argc, char *argv[], char *envp[]) {

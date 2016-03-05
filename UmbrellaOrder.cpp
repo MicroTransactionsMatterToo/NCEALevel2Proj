@@ -33,17 +33,11 @@ int main(int argc, char *argv[], char *envp[]) {
         // Store regexx for matching
         std::regex userMatch("USER=");
         // Check if it's the USER entry of path
-        if (std::regex_search(envp[i], userMatch) == true) {
+        if (std::regex_search(envp[i], userMatch)) {
             // Store the regex cause otherwise it breaks
             std::regex notNAME("[^USER=].+");
-            /* Debug Stuff
-            std::cout << envp[i] << std::endl;
-            auto* test = envp;
-            std::cout << typeid(test).name() << std::endl;
-            std::cout << test << std::endl;
-            */
             // Filter out the user's name and store it
-            // Assign the correct envp index to a char cause otherwise I get errors
+            // Assign the correct envp index to a char cause otherwise it breaks
             char *envUserName{envp[i]};
             // Create literal match results holder
             std::cmatch match;
@@ -60,7 +54,7 @@ int main(int argc, char *argv[], char *envp[]) {
                 auto tmp = fetchedName[j];
                 usersName.push_back(tmp);
             }
-            std::cout << "Welcome to UmbrellaOrder " << usersName << std::endl;
+            std::cout << "Welcome to Umbrella-Order " << usersName << std::endl;
         }
     }
 }

@@ -20,21 +20,26 @@ void orderToList() {
 
 }
 // Takes user input
-struct userInput {
-    // Initial Prompt
-    void inputPrompt() {
-        std::cout << "Please enter the desired color of your Umbrella" << std::endl;
-        std::cout <<
-        "You will then be prompted for quantity. To cancel an order, type cancel. To finish an order and" << std::endl;
-        std::cout << " proceed to checkout, type done" << std::endl;
-        // Print Order Num
-        std::cout << orderNum::orderNum << std::endl;
-    };
-    void colInput() {}
-    // Now that's done, proceed to the input
-    // Input Block //
-
+// Now thats done, take the user's desired input
+void colInput() {
+    std::cout << "Please enter the desired umbrella color" << std::endl;
+    std::cout << "Put your color in please: "; // No line end here to make this a prompt
+    string usersInput; // String for storing user input
+    // Use getline for input extraction
+    getline(std::cin, usersInput);
 };
+
+
+// Initial Prompt
+void inputPrompt() {
+    std::cout << "Please enter the desired color of your Umbrella" << std::endl;
+    std::cout << "You will then be prompted for quantity. To cancel an order, type cancel. To finish an order and  proceed to checkout, type done" << std::endl;
+    // Print Order Num
+    std::cout << orderNum::orderNum << std::endl;
+    colInput();
+};
+
+
 // Main Function
 int main(int argc, char *argv[], char *envp[]) {
     const std::locale loc;
@@ -68,6 +73,7 @@ int main(int argc, char *argv[], char *envp[]) {
             std::cout << "Welcome to Umbrella-Order " << usersName << std::endl;
         }
     }
+    inputPrompt();
     // Because C++ Sucks
     return 0;
 }

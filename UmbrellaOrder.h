@@ -10,6 +10,7 @@
 #include <array>
 #include <regex>
 #include <cctype>
+#include <string>
 // Usings
 // String cause otherwise everything is is broken
 using std::string;

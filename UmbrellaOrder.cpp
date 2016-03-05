@@ -3,7 +3,7 @@
 //
 #include "UmbrellaOrder.h"
 // Namespace to store number of order and whats been previously ordered.
-namespace {
+namespace orderNum {
     std::map<char*, int, int> orderSt;
     int orderNum;
     void incrNum () {
@@ -20,10 +20,21 @@ void orderToList() {
 
 }
 // Takes user input
-void userInput() {
+struct userInput {
+    // Initial Prompt
+    void inputPrompt() {
+        std::cout << "Please enter the desired color of your Umbrella" << std::endl;
+        std::cout <<
+        "You will then be prompted for quantity. To cancel an order, type cancel. To finish an order and" << std::endl;
+        std::cout << " proceed to checkout, type done" << std::endl;
+        // Print Order Num
+        std::cout << orderNum::orderNum << std::endl;
+    };
+    void colInput() {}
+    // Now that's done, proceed to the input
+    // Input Block //
 
-}
-
+};
 // Main Function
 int main(int argc, char *argv[], char *envp[]) {
     const std::locale loc;
@@ -57,4 +68,6 @@ int main(int argc, char *argv[], char *envp[]) {
             std::cout << "Welcome to Umbrella-Order " << usersName << std::endl;
         }
     }
+    // Because C++ Sucks
+    return 0;
 }

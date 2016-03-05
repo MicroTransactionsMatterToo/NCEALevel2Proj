@@ -26,6 +26,7 @@ void userInput() {
 
 // Main Function
 int main(int argc, char *argv[], char *envp[]) {
+    const std::locale loc;
     // Greeting
     // Debugging fo now
     for (int i = 0; i < sizeof(*envp); i++) {
@@ -49,15 +50,17 @@ int main(int argc, char *argv[], char *envp[]) {
             // Find everything proceeded by USER= and then return it excluding USER=
             std::regex_search(envUserName, match, notNAME);
             // Assign matches string result to another char for same reason as above
-            char *fetchedName;
-            strcpy(fetchedName, match.str().data());
-            char *firstLetter;
-            strcpy(firstLetter, fetchedName);
+            string fetchedName = match.str().data();
             // Capitalize first letter - Here we have to write to a new char to prevent breakage
-            char usersName[sizeof(*fetchedName)];
-            strcpy(usersName, std::toupper(firstLetter));
-
-            std::cout << usersName[1] << std::endl;
+            string usersName;
+            usersName = fetchedName[0];
+            usersName = toupper(usersName[0], loc);
+            for (auto j = 1; j <= fetchedName.size()-1; j++) {
+                // TMP storage otherwise it craps itself
+                auto tmp = fetchedName[j];
+                usersName.push_back(tmp);
+            }
+            std::cout << usersName << std::endl;
             std::cout << "Welcome to UmbrellaOrder " << std::endl;
         }
     }

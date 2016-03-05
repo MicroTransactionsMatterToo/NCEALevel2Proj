@@ -11,4 +11,6 @@
 #include <regex>
 #include <cctype>
 // Usings
+// String cause otherwise everything is is broken
+using std::string;
 #endif //PROJECT_UMBRELLAORDER_H

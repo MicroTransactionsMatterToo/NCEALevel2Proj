@@ -4,8 +4,11 @@
 #include "UmbrellaOrder.h"
 // Namespace to store number of order and whats been previously ordered.
 namespace orderNum {
-    std::map<string, std::pair<int, int>> ordersMade;
     int orderNum;
+    // Typedef for nested dict
+    typedef std::map<string, int> newOrder;
+    // Create initial dict
+    std::map<int, newOrder> orders;
     void incrNum () {
             orderNum += 1;
     };
@@ -13,6 +16,7 @@ namespace orderNum {
 // Prototypes
 void initPrompt();
 bool checkColour(string colour);
+bool continuePrompt();
 // Functions that main will call
 
 // Confirms Order
@@ -36,13 +40,11 @@ void colInput() {
     std::cout << "Please enter the desired umbrella colour" << std::endl;
     std::cout << "Put your colour in please: "; // No line end here to make this a prompt
     string usersInput; // String for storing user input
-    int quant;
-    // Use getline for input extraction
-    getline(std::cin, usersInput);
-    std::cout << std::endl << "Quantity: ";
-    std::cin >> quant;
     // String to store lowercase copy of colour
     string lowerColour;
+    int quant; // Store amount ordered
+    // Use getline for input extraction
+    getline(std::cin, usersInput);
     // Convert colour to lowercase so it's case insensitive
     for (int j = 0; j < usersInput.length(); ++j) {
         string tmp;
@@ -51,24 +53,42 @@ void colInput() {
         lowerColour.append(tmp);
         // Debug std::cout << lowerColour << std::endl;
     }
-    // Check the users input to see if it matches a valid colour
-    if (checkColour(lowerColour)) { // If it return true
-        // Append usersInput to orderNum::ordersMade
-        orderNum::ordersMade[lowerColour] = std::pair<int, int>(quant, orderNum::orderNum);
+    // Check the users input to see if it matches a valid colour. If so, ask's for amount
+    if (checkColour(lowerColour)) {
+        std::cout << std::endl << "Quantity: ";
+        std::cin >> quant;
+        // Append/Update usersInput to orderNum::ordersMade
+        auto mapAccess = orderNum::orders[orderNum::orderNum];
+        std::map<string, int> tmpOrderStore;
+        tmpOrderStore[lowerColour] = quant;
+        orderNum::orders[orderNum::orderNum] = tmpOrderStore;
         // Because it's stored as a pair, we have to access it like this
-        std::cout << "Quantity: " << orderNum::ordersMade[lowerColour].first /* First of the pair */ << std::endl;
-        std::cout << "Order Num: " << orderNum::ordersMade[lowerColour].second /* Second of the pair */ << std::endl;
+        std::cout << "Color: " << lowerColour << std::endl;
+        std::cout << "Quantity: " << orderNum::orders[orderNum::orderNum][lowerColour] /* First of the pair */ << std::endl;
+        std::cout << "Order Num: " << orderNum::orderNum /* Second of the pair */ << std::endl;
+
+    }
+
+    if (checkColour(lowerColour)) { // If it return true
     }
 
 };
+bool continuePrompt () {
+    std::cout << "Are you sure you wish to continue with this selection" << std::endl;
+    std::cout << "Your current order is: " << std::endl;
+    // for (auto it = orderNum::ordersMade.begin(); it != orderNum::ordersMade.end(); ++it) {
+        // std::cout << orderNum::ordersMade[0].first << std::endl;
+    // }
+    return true;
+}
 
 
-// Initial Prompt
 void inputPrompt() {
     // Print Order Num
     std::cout << orderNum::orderNum << std::endl;
     colInput();
 };
+// Initial Prompt
 void initPrompt() {
     // Moved here so it only prints once
     std::cout << "Please enter the desired colour of your Umbrella" << std::endl;
@@ -91,6 +111,9 @@ bool checkColour(string colour) {
         if (colour == *i) {
             return true;
         }
+        else if (colour == "done") {
+            continuePrompt();
+        }
     }
     // If loop exits return false
     return false;
@@ -100,9 +123,8 @@ bool checkColour(string colour) {
 int main(int argc, char *argv[], char *envp[]) {
     const std::locale loc;
     // Greeting
-    // Debugging fo now
     for (int i = 0; i < sizeof(*envp); i++) {
-        // Store regexx for matching
+        // Store regex for matching
         std::regex userMatch("USER=");
         // Check if it's the USER entry of path
         if (std::regex_search(envp[i], userMatch)) {

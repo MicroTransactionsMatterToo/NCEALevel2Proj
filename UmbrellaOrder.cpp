@@ -3,8 +3,18 @@
 //
 #include "UmbrellaOrder.h"
 // Namespace to store number of order and whats been previously ordered.
-namespace orderNum {
+namespace ordering {
+    // Create initialize vars
     int orderNum;
+    std::list<string> validColours = {
+            "red",
+            "blue",
+            "light green",
+            "orange",
+            "dark grey",
+            "clear",
+    };
+    // Create unitialize ones
     // Typedef for nested dict
     typedef std::map<string, int> newOrder;
     // Create initial dict
@@ -14,9 +24,10 @@ namespace orderNum {
     };
 }
 // Prototypes
-void initPrompt();
+int initPrompt(int doneBefore);
 bool checkColour(string colour);
 bool continuePrompt();
+int main(int argc, char *argv[], char *envp[]);
 // Functions that main will call
 
 // Confirms Order
@@ -34,7 +45,7 @@ void orderToList() {
 
 // Takes user input
 // Now thats done, take the user's desired input
-void colInput() {
+int colInput() {
     // This is here so tolower works
     const std::locale loc;
     std::cout << "Please enter the desired umbrella colour" << std::endl;
@@ -42,11 +53,11 @@ void colInput() {
     string usersInput; // String for storing user input
     // String to store lowercase copy of colour
     string lowerColour;
-    int quant; // Store amount ordered
+    int quant = 0; // Store amount ordered
     // Use getline for input extraction
     getline(std::cin, usersInput);
     // Convert colour to lowercase so it's case insensitive
-    for (int j = 0; j < usersInput.length(); ++j) {
+    for (unsigned long j = 0; j < usersInput.length(); j++) {
         string tmp;
         tmp = std::tolower(usersInput.at(j), loc);
         // Debug std::cout << tmp << std::endl;
@@ -57,62 +68,66 @@ void colInput() {
     if (checkColour(lowerColour)) {
         std::cout << std::endl << "Quantity: ";
         std::cin >> quant;
-        // Append/Update usersInput to orderNum::ordersMade
-        auto mapAccess = orderNum::orders[orderNum::orderNum];
+        std::cin.ignore (std::numeric_limits<std::streamsize>::max(), '\n');
+        // Append/Update usersInput to ordering::ordersMade
         std::map<string, int> tmpOrderStore;
         tmpOrderStore[lowerColour] = quant;
-        orderNum::orders[orderNum::orderNum] = tmpOrderStore;
+        ordering::orders[ordering::orderNum] = tmpOrderStore;
         // Because it's stored as a pair, we have to access it like this
         std::cout << "Color: " << lowerColour << std::endl;
-        std::cout << "Quantity: " << orderNum::orders[orderNum::orderNum][lowerColour] /* First of the pair */ << std::endl;
-        std::cout << "Order Num: " << orderNum::orderNum /* Second of the pair */ << std::endl;
-
+        std::cout << "Quantity: " << ordering::orders[ordering::orderNum][lowerColour] /* First of the pair */ << std::endl;
+        std::cout << "Order Num: " << ordering::orderNum /* Second of the pair */ << std::endl;
+        std::cin.clear();
+        return 0;
     }
-
-    if (checkColour(lowerColour)) { // If it return true
+    else if (!checkColour(lowerColour)){
+        std::cout << "Please enter a valid colour!!" << std::endl << "Valid colors are" << std::endl;
+        for (auto it = ordering::validColours.begin(); it != ordering::validColours.end(); ++it){
+            std::cout << *it << std::endl;
+        }
+        usersInput.~basic_string();
+        lowerColour.~basic_string();
+        std::cin.~basic_istream();
+        return 1;
     }
-
 };
 bool continuePrompt () {
     std::cout << "Are you sure you wish to continue with this selection" << std::endl;
     std::cout << "Your current order is: " << std::endl;
-    // for (auto it = orderNum::ordersMade.begin(); it != orderNum::ordersMade.end(); ++it) {
-        // std::cout << orderNum::ordersMade[0].first << std::endl;
-    // }
+    for (auto it = ordering::validColours.begin(); it != ordering::validColours.end(); ++it) {
+        std::cout << ordering::orders[ordering::orderNum][*it] << std::endl;
+    }
+
     return true;
 }
 
 
-void inputPrompt() {
-    // Print Order Num
-    std::cout << orderNum::orderNum << std::endl;
-    colInput();
-};
 // Initial Prompt
-void initPrompt() {
-    // Moved here so it only prints once
-    std::cout << "Please enter the desired colour of your Umbrella" << std::endl;
-    std::cout << "You will then be prompted for quantity. To cancel an order, type cancel. To finish an order and  proceed to checkout, type done" << std::endl;
-    inputPrompt();
+int initPrompt(int doneBefore) {
+    if (doneBefore == 0) {
+        // Moved here so it only prints once
+        std::cout << "Please enter the desired colour of your Umbrella" << std::endl;
+        std::cout <<
+        "You will then be prompted for quantity. To cancel an order, type cancel. To finish an order and  proceed to checkout, type done" <<
+        std::endl;
+        std::cout << "Order Num: " << ordering::orderNum << std::endl;
+        return colInput();
+    }
+    else {
+        return colInput();
+    }
 }
 // Checks Color
 bool checkColour(string colour) {
-    // Store valid colours
-    std::list<string> validColours = {
-            "red",
-            "blue",
-            "light green",
-            "orange",
-            "dark grey",
-            "clear",
-    };
     // Iterate through items in validColours
-    for (auto i = validColours.begin(); i != validColours.end(); ++i) {
+    for (auto i = ordering::validColours.begin(); i != ordering::validColours.end(); ++i) {
         if (colour == *i) {
             return true;
         }
         else if (colour == "done") {
-            continuePrompt();
+            if(continuePrompt()) {
+                return true;
+            }
         }
     }
     // If loop exits return false
@@ -151,7 +166,12 @@ int main(int argc, char *argv[], char *envp[]) {
             std::cout << "Welcome to Umbrella-Order " << usersName << std::endl;
         }
     }
-    inputPrompt();
+    int doneBefore = 0;
+    do {
+        doneBefore += 1;
+        std::cout << "Yoho" << std::endl;
+        sleep(0.5);
+    } while (initPrompt(doneBefore) == 0 || initPrompt(doneBefore) == 1);
     // Because C++ Sucks
     return 0;
 }

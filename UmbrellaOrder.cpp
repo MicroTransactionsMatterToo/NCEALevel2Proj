@@ -10,6 +10,9 @@ namespace orderNum {
             orderNum += 1;
     };
 }
+// Prototypes
+void initPrompt();
+bool checkColour(string colour);
 // Functions that main will call
 
 // Confirms Order
@@ -23,12 +26,13 @@ void orderToList() {
 }
 
 // Prototype to prevent breakage
-void initPrompt();
-bool checkColour(string colour);
+
 
 // Takes user input
 // Now thats done, take the user's desired input
 void colInput() {
+    // This is here so tolower works
+    const std::locale loc;
     std::cout << "Please enter the desired umbrella colour" << std::endl;
     std::cout << "Put your colour in please: "; // No line end here to make this a prompt
     string usersInput; // String for storing user input
@@ -37,13 +41,23 @@ void colInput() {
     getline(std::cin, usersInput);
     std::cout << std::endl << "Quantity: ";
     std::cin >> quant;
+    // String to store lowercase copy of colour
+    string lowerColour;
+    // Convert colour to lowercase so it's case insensitive
+    for (int j = 0; j < usersInput.length(); ++j) {
+        string tmp;
+        tmp = std::tolower(usersInput.at(j), loc);
+        // Debug std::cout << tmp << std::endl;
+        lowerColour.append(tmp);
+        // Debug std::cout << lowerColour << std::endl;
+    }
     // Check the users input to see if it matches a valid colour
-    if (checkColour(usersInput)) { // If it return true
+    if (checkColour(lowerColour)) { // If it return true
         // Append usersInput to orderNum::ordersMade
-        orderNum::ordersMade[usersInput] = std::pair<int, int>(quant, orderNum::orderNum);
+        orderNum::ordersMade[lowerColour] = std::pair<int, int>(quant, orderNum::orderNum);
         // Because it's stored as a pair, we have to access it like this
-        std::cout << "Quantity: " << orderNum::ordersMade[usersInput].first /* First of the pair */ << std::endl;
-        std::cout << "Order Num: " << orderNum::ordersMade[usersInput].second /* Second of the pair */ << std::endl;
+        std::cout << "Quantity: " << orderNum::ordersMade[lowerColour].first /* First of the pair */ << std::endl;
+        std::cout << "Order Num: " << orderNum::ordersMade[lowerColour].second /* Second of the pair */ << std::endl;
     }
 
 };
@@ -63,6 +77,7 @@ void initPrompt() {
 }
 // Checks Color
 bool checkColour(string colour) {
+    // Store valid colours
     std::list<string> validColours = {
             "red",
             "blue",
